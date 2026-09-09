@@ -1,4 +1,4 @@
-import { memo, useState, type Dispatch } from 'react';
+import { memo, type Dispatch } from 'react';
 import type { Player } from '../types';
 import type { PlayersAction } from '../reducers/playersReducer';
 
@@ -9,8 +9,6 @@ interface ItemRowProps {
 }
 
 function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRowProps) {
-
-  const [note, setNote] = useState('');
 
   return (
     <tr className="item-row">
@@ -41,8 +39,14 @@ function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRo
           type="text"
           className="note-input"
           placeholder="Add a note..."
-          value={note}
-          onChange={(event) => setNote(event.target.value)}
+          value={player.note}
+          onChange={(event) =>
+            dispatchPlayersAction({
+              type: 'UPDATE_PLAYER_NOTE',
+              playerIdToUpdate: player.id,
+              updatedNote: event.target.value,
+            })
+          }
           aria-label={`Note for ${player.name}`}
         />
       </td>

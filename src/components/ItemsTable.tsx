@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import { initialPlayers } from '../data/players';
 import { playersReducer } from '../reducers/playersReducer';
@@ -14,10 +13,9 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
   const [players, dispatchPlayersAction] = useReducer(playersReducer, initialPlayers);
   const [deletedPlayerName, setDeletedPlayerName] = useState<string | null>(null);
 
-  // Bug: missing dependency. `filtersState` is used inside the memoized function
   const filteredPlayers = useMemo(
     () => filterPlayers(players, filtersState),
-    [players],
+    [players,filtersState],
   );
 
   useEffect(() => {
@@ -52,10 +50,9 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
               </td>
             </tr>
           ) : (
-            filteredPlayers.map((currentPlayer, index) => (
+            filteredPlayers.map((currentPlayer) => (
               <ItemRow
-              // Bug: key issue
-                key={index}
+                key={currentPlayer.id}
                 player={currentPlayer}
                 dispatchPlayersAction={dispatchPlayersAction}
                 setDeletedPlayerName={setDeletedPlayerName}
