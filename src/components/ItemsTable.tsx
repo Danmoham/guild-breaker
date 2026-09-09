@@ -1,14 +1,22 @@
-import type { Dispatch } from 'react';
-import type { Player } from '../types';
-import type { PlayersAction } from '../reducers/playersReducer';
+import { useMemo, useReducer } from 'react';
+import { initialPlayers } from '../data/players';
+import { playersReducer } from '../reducers/playersReducer';
+import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
+import { filterPlayers } from '../utils/filterPlayers';
 import ItemRow from './ItemRow';
 
 interface ItemsTableProps {
-  players: Player[];
-  dispatchPlayersAction: Dispatch<PlayersAction>;
+  filtersState: PlayerFiltersState;
 }
 
-function ItemsTable({ players, dispatchPlayersAction }: ItemsTableProps) {
+function ItemsTable({ filtersState }: ItemsTableProps) {
+  const [players, dispatchPlayersAction] = useReducer(playersReducer, initialPlayers);
+
+  const filteredPlayers = useMemo(
+    () => filterPlayers(players, filtersState),
+    [players, filtersState],
+  );
+
   return (
     <table className="items-table">
       <thead>
@@ -21,14 +29,14 @@ function ItemsTable({ players, dispatchPlayersAction }: ItemsTableProps) {
         </tr>
       </thead>
       <tbody>
-        {players.length === 0 ? (
+        {filteredPlayers.length === 0 ? (
           <tr>
             <td colSpan={5} className="empty-state">
               No players found.
             </td>
           </tr>
         ) : (
-          players.map((currentPlayer) => (
+          filteredPlayers.map((currentPlayer) => (
             <ItemRow
               key={currentPlayer.id}
               player={currentPlayer}

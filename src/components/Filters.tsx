@@ -1,4 +1,4 @@
-import type { Dispatch } from 'react';
+import {  type Dispatch } from 'react';
 import type {
   PlayerFiltersAction,
   PlayerFiltersState,
@@ -83,4 +83,4 @@ function Filters({ filtersState, dispatchFiltersAction }: FiltersProps) {
   );
 }
 
-export default Filters;
+export default Filters

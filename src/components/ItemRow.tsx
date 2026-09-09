@@ -1,4 +1,4 @@
-import type { Dispatch } from 'react';
+import { memo, type Dispatch } from 'react';
 import type { Player } from '../types';
 import type { PlayersAction } from '../reducers/playersReducer';
 
@@ -48,4 +48,10 @@ function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
   );
 }
 
-export default ItemRow;
+/**
+ * Memoized so that updating or deleting one player only re-renders that
+ * player's row instead of every row in the table. Safe because `player`
+ * keeps a stable reference for unaffected rows (see playersReducer) and
+ * `dispatchPlayersAction` is a stable function returned by useReducer.
+ */
+export default memo(ItemRow);
