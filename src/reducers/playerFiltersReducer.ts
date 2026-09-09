@@ -12,6 +12,20 @@ export const initialPlayerFiltersState: PlayerFiltersState = {
   selectedMinimumRating: 0,
 };
 
+/**
+ * Derives whether any filter is currently active, rather than storing it as
+ * separate state (which would risk getting out of sync with the individual
+ * filter fields).
+ */
+export function hasActiveFilters(filtersState: PlayerFiltersState): boolean {
+  return (
+    filtersState.searchQuery.trim() !== '' ||
+    filtersState.selectedNationality !== '' ||
+    filtersState.selectedBestPosition !== '' ||
+    filtersState.selectedMinimumRating !== 0
+  );
+}
+
 export type PlayerFiltersAction =
   | { type: 'SET_SEARCH_QUERY'; searchQuery: string }
   | { type: 'SET_SELECTED_NATIONALITY'; selectedNationality: string }

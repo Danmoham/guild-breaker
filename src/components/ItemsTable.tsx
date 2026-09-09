@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import { initialPlayers } from '../data/players';
 import { playersActionReducer } from '../reducers/playersReducer';
-import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
+import { hasActiveFilters, type PlayerFiltersState } from '../reducers/playerFiltersReducer';
 import { filterPlayers } from '../utils/filterPlayers';
 import ItemRow from './ItemRow';
 
@@ -14,8 +14,8 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
   const [deletedPlayerName, setDeletedPlayerName] = useState<string | null>(null);
 
   const filteredPlayers = useMemo(
-    () => filterPlayers(players, filtersState),
-    [players,filtersState],
+    () => hasActiveFilters(filtersState) ? filterPlayers(players, filtersState) : players,   
+    [players,filtersState]
   );
 
   useEffect(() => {

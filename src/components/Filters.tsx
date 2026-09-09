@@ -1,7 +1,8 @@
 import {  type Dispatch } from 'react';
-import type {
-  PlayerFiltersAction,
-  PlayerFiltersState,
+import {
+  hasActiveFilters,
+  type PlayerFiltersAction,
+  type PlayerFiltersState,
 } from '../reducers/playerFiltersReducer';
 import {
   availableNationalities,
@@ -57,6 +58,16 @@ function Filters({ filtersState, dispatchFiltersAction }: FiltersProps) {
           ))}
         </select>
       </label>
+
+      {hasActiveFilters(filtersState) && (
+        <button
+          type="button"
+          className="btn btn-reset-filters"
+          onClick={() => dispatchFiltersAction({ type: 'RESET_FILTERS' })}
+        >
+          Reset filters
+        </button>
+      )}
     </div>
   );
 }
