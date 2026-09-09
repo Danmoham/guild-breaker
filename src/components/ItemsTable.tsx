@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import { initialPlayers } from '../data/players';
 import { playersReducer } from '../reducers/playersReducer';
 import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
@@ -13,9 +14,10 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
   const [players, dispatchPlayersAction] = useReducer(playersReducer, initialPlayers);
   const [deletedPlayerName, setDeletedPlayerName] = useState<string | null>(null);
 
+  // Bug: missing dependency. `filtersState` is used inside the memoized function
   const filteredPlayers = useMemo(
     () => filterPlayers(players, filtersState),
-    [players, filtersState],
+    [players],
   );
 
   useEffect(() => {
@@ -24,19 +26,6 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
     const timeoutId = window.setTimeout(() => setDeletedPlayerName(null), 3000);
     return () => window.clearTimeout(timeoutId);
   }, [deletedPlayerName]);
-
-  const handleDispatchPlayersAction = useCallback(
-    (action: Parameters<typeof dispatchPlayersAction>[0]) => {
-      if (action.type === 'DELETE_PLAYER') {
-        const playerToDelete = players.find((player) => player.id === action.playerIdToDelete);
-        if (playerToDelete) {
-          setDeletedPlayerName(playerToDelete.name);
-        }
-      }
-      dispatchPlayersAction(action);
-    },
-    [players],
-  );
 
   return (
     <>
@@ -63,11 +52,13 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
               </td>
             </tr>
           ) : (
-            filteredPlayers.map((currentPlayer) => (
+            filteredPlayers.map((currentPlayer, index) => (
               <ItemRow
-                key={currentPlayer.id}
+              // Bug: key issue
+                key={index}
                 player={currentPlayer}
-                dispatchPlayersAction={handleDispatchPlayersAction}
+                dispatchPlayersAction={dispatchPlayersAction}
+                setDeletedPlayerName={setDeletedPlayerName}
               />
             ))
           )}
