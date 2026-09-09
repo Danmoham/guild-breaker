@@ -5,7 +5,6 @@ import type {
 } from '../reducers/playerFiltersReducer';
 import {
   availableNationalities,
-  availableBestPositions,
   availableMinimumRatingOptions,
 } from '../data/filterOptions';
 
@@ -33,27 +32,6 @@ function Filters({ filtersState, dispatchFiltersAction }: FiltersProps) {
           {availableNationalities.map((nationalityOption) => (
             <option key={nationalityOption} value={nationalityOption}>
               {nationalityOption}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label className="filter-field">
-        <span className="filter-label">Best Position</span>
-        <select
-          className="filter-select"
-          value={filtersState.selectedBestPosition}
-          onChange={(event) =>
-            dispatchFiltersAction({
-              type: 'SET_SELECTED_BEST_POSITION',
-              selectedBestPosition: event.target.value,
-            })
-          }
-        >
-          <option value="">All</option>
-          {availableBestPositions.map((bestPositionOption) => (
-            <option key={bestPositionOption} value={bestPositionOption}>
-              {bestPositionOption}
             </option>
           ))}
         </select>

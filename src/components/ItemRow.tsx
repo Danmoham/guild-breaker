@@ -1,4 +1,4 @@
-import { memo, type Dispatch } from 'react';
+import { memo, useState, type Dispatch } from 'react';
 import type { Player } from '../types';
 import type { PlayersAction } from '../reducers/playersReducer';
 
@@ -8,11 +8,13 @@ interface ItemRowProps {
 }
 
 function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
+
+  const [note, setNote] = useState('');
+
   return (
     <tr className="item-row">
       <td>{player.name}</td>
       <td>{player.nationality}</td>
-      <td>{player.bestPosition}</td>
       <td>
         <select
           className="rating-select"
@@ -32,6 +34,16 @@ function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
             </option>
           ))}
         </select>
+      </td>
+      <td>
+        <input
+          type="text"
+          className="note-input"
+          placeholder="Add a note..."
+          value={note}
+          onChange={(event) => setNote(event.target.value)}
+          aria-label={`Note for ${player.name}`}
+        />
       </td>
       <td className="actions-cell">
         <button
@@ -55,3 +67,4 @@ function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
  * `dispatchPlayersAction` is a stable function returned by useReducer.
  */
 export default memo(ItemRow);
+
