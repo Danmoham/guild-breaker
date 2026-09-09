@@ -7,8 +7,7 @@ export type PlayersAction =
 
 export function playersReducer(currentPlayers: Player[], playersAction: PlayersAction): Player[] {
   switch (playersAction.type) {
-    case 'ADD_PLAYER':
-      return [...currentPlayers, playersAction.player];
+ 
     case 'DELETE_PLAYER':
       return currentPlayers.filter((player) => player.id !== playersAction.playerIdToDelete);
     case 'UPDATE_PLAYER_RATING':
