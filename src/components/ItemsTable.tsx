@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import {  useMemo, useReducer } from 'react';
 import { initialPlayers } from '../data/players';
 import { playersReducer } from '../reducers/playersReducer';
 import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
@@ -12,7 +12,6 @@ interface ItemsTableProps {
 
 function ItemsTable({ filtersState }: ItemsTableProps) {
   const [players, dispatchPlayersAction] = useReducer(playersReducer, initialPlayers);
-  const [deletedPlayerName, setDeletedPlayerName] = useState<string | null>(null);
 
   // Bug: missing dependency. `filtersState` is used inside the memoized function
   const filteredPlayers = useMemo(
@@ -20,20 +19,9 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
     [players],
   );
 
-  useEffect(() => {
-    if (!deletedPlayerName) return;
-
-    const timeoutId = window.setTimeout(() => setDeletedPlayerName(null), 3000);
-    return () => window.clearTimeout(timeoutId);
-  }, [deletedPlayerName]);
-
   return (
     <>
-      {deletedPlayerName && (
-        <div className="toast toast-success" role="status">
-          {deletedPlayerName} has been deleted.
-        </div>
-      )}
+  
       <table className="items-table">
         <thead>
           <tr>
@@ -58,7 +46,6 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
                 key={index}
                 player={currentPlayer}
                 dispatchPlayersAction={dispatchPlayersAction}
-                setDeletedPlayerName={setDeletedPlayerName}
               />
             ))
           )}

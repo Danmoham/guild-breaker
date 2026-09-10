@@ -5,10 +5,9 @@ import type { PlayersAction } from '../reducers/playersReducer';
 interface ItemRowProps {
   player: Player;
   dispatchPlayersAction: Dispatch<PlayersAction>;
-  setDeletedPlayerName?: (playerName: string) => void;
 }
 
-function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRowProps) {
+function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
 
   const [note, setNote] = useState('');
 
@@ -52,7 +51,6 @@ function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRo
           className="btn btn-delete"
           onClick={() => {
             dispatchPlayersAction({ type: 'DELETE_PLAYER', playerIdToDelete: player.id });
-            setDeletedPlayerName?.(player.name);
           }}
         >
           Delete
