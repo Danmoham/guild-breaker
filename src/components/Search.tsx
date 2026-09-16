@@ -10,8 +10,8 @@ interface SearchProps {
 }
 
 // 🏆 WELCOME TO THE WORST SEARCH BOX CONTEST 🏆
-// Rules: make it "work", but make it a crime against usability or an absolute pain in the arse to debug.
-// Bonus points for: infinite loops, off-by-one filtering, regex nobody
+// Rules: make it "work", but make it a crime against humanity to use or an absolute pain in the arse to debug.
+// Bonus points for: infinite loops, off-by-one filtering, regex nobody, EXTRA BONUS POINTS IF YOU COULD MAKE A FLYING SEARCH BOX (interpret that as you wish)
 // understands, or a search that only works while you're in bed. 
 // Also feel free to go ham with ai.
 // Penalty points for: writing clean, readable, sensible code. 
