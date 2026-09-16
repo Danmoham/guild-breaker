@@ -9,6 +9,8 @@ function formatSecondsAsClock(totalSeconds: number): string {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
+
+// Please don't spoil the fun with messing with these functions
 /**
  * Reads (or creates) the contest deadline from localStorage so refreshing
  * the page doesn't give anyone extra time. Nice try though.
