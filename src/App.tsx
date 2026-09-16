@@ -3,6 +3,7 @@ import './index.css';
 import ItemsTable from './components/ItemsTable';
 import Search from './components/Search';
 import Filters from './components/Filters';
+import CountdownTimer from './components/CountdownTimer';
 import {
   initialPlayerFiltersState,
   playerFiltersReducer,
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="app-title">Guild Breaker - fix this project!</h1>
+      <h1 className="app-title">The worlds most accurate football player database, except I don't search</h1>
+      <CountdownTimer />
       <div className="toolbar">
         <Search filtersState={filtersState} dispatchFiltersAction={dispatchFiltersAction} />
         <Filters filtersState={filtersState} dispatchFiltersAction={dispatchFiltersAction} />

@@ -37,9 +37,14 @@ export function playerFiltersReducer(
   currentFiltersState: PlayerFiltersState,
   filtersAction: PlayerFiltersAction,
 ): PlayerFiltersState {
+  // done this automatically to h
   switch (filtersAction.type) {
+    // 🏆 WORST SEARCH BOX CONTEST — REDUCER DIVISION 🏆
+    // TODO: actually update searchQuery
+    // spoiler: state currently refuses to change
     case 'SET_SEARCH_QUERY':
-      return { ...currentFiltersState, searchQuery: filtersAction.searchQuery };
+      void filtersAction.searchQuery;
+      return currentFiltersState;
     case 'SET_SELECTED_NATIONALITY':
       return {
         ...currentFiltersState,

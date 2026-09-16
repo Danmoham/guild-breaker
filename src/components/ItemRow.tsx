@@ -5,10 +5,9 @@ import type { PlayersAction } from '../reducers/playersReducer';
 interface ItemRowProps {
   player: Player;
   dispatchPlayersAction: Dispatch<PlayersAction>;
-  setDeletedPlayerName?: (playerName: string) => void;
 }
 
-function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRowProps) {
+function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
 
   return (
     <tr className="item-row">
@@ -56,7 +55,6 @@ function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRo
           className="btn btn-delete"
           onClick={() => {
             dispatchPlayersAction({ type: 'DELETE_PLAYER', playerIdToDelete: player.id });
-            setDeletedPlayerName?.(player.name);
           }}
         >
           Delete
@@ -67,10 +65,12 @@ function ItemRow({ player, dispatchPlayersAction, setDeletedPlayerName }: ItemRo
 }
 
 /**
+ * THIS IS ACTUALLY HELPFUL, SO FEEL FREE TO TAKE NOTE
  * Memoized so that updating or deleting one player only re-renders that
  * player's row instead of every row in the table. Safe because `player`
  * keeps a stable reference for unaffected rows (see playersReducer) and
  * `dispatchPlayersAction` is a stable function returned by useReducer.
+ * This is act
  */
 export default memo(ItemRow);
 

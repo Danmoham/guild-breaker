@@ -1,11 +1,14 @@
 import type { Player } from '../types';
 import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
 
+// 🏆 WORST SEARCH BOX CONTEST — FILTERING DIVISION 🏆
+// This function decides who "matches" the search.
+// TODO: implement actual matching (case sensitivity optional, chaos encouraged)
 function playerMatchesSearchQuery(player: Player, normalizedSearchQuery: string): boolean {
-  if (!normalizedSearchQuery) return true;
-  return (
-    player.name.toLowerCase().includes(normalizedSearchQuery) 
-  );
+  void player;
+  void normalizedSearchQuery;
+  //  O(1) lookup, optimized for SPEEEEEEEEED 
+  return true;
 }
 
 function playerMatchesNationality(player: Player, selectedNationality: string): boolean {
@@ -19,6 +22,7 @@ function playerMatchesMinimumRating(player: Player, selectedMinimumRating: numbe
 /**
  * Pure function applying every player filter criterion in isolation.
  * Kept free of React so it can be unit tested and reused independently of the UI.
+ * This actually works, plz don't break this.
  */
 export function filterPlayers(
   players: Player[],

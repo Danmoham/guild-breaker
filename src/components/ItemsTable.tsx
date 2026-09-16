@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import {  useMemo, useReducer } from 'react';
 import { initialPlayers } from '../data/players';
 import { playersActionReducer } from '../reducers/playersReducer';
 import { hasActiveFilters, type PlayerFiltersState } from '../reducers/playerFiltersReducer';
@@ -11,27 +11,15 @@ interface ItemsTableProps {
 
 function ItemsTable({ filtersState }: ItemsTableProps) {
   const [players, dispatchPlayersAction] = useReducer(playersActionReducer, initialPlayers);
-  const [deletedPlayerName, setDeletedPlayerName] = useState<string | null>(null);
 
   const filteredPlayers = useMemo(
     () => hasActiveFilters(filtersState) ? filterPlayers(players, filtersState) : players,   
     [players,filtersState]
   );
 
-  useEffect(() => {
-    if (!deletedPlayerName) return;
-
-    const timeoutId = window.setTimeout(() => setDeletedPlayerName(null), 3000);
-    return () => window.clearTimeout(timeoutId);
-  }, [deletedPlayerName]);
-
   return (
     <>
-      {deletedPlayerName && (
-        <div className="toast toast-success" role="status">
-          {deletedPlayerName} has been deleted.
-        </div>
-      )}
+ 
       <table className="items-table">
         <thead>
           <tr>
@@ -55,7 +43,6 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
                 key={currentPlayer.id}
                 player={currentPlayer}
                 dispatchPlayersAction={dispatchPlayersAction}
-                setDeletedPlayerName={setDeletedPlayerName}
               />
             ))
           )}
