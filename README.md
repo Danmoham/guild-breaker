@@ -4,8 +4,10 @@ As the title suggests, your mission is to build the most abysmal search experien
 
 ## RULES
 - You will have to pair up for this, so pick someone who has written some shoddy PR's.
-- You only have ten minutes so think on your feet
+- You only have ten minutes so think on your feet.
+- You can use AI.
 - PLEASE DO NOT tamper with anything that is not related to the search, I have added TODO's where you can and should alter. You can change any CCS you want, but don't go about messing with the timer or the data layer.
+- When presenting run it in incognito and turn off react scan.
 
 
 ## HOW TO RUN
