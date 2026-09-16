@@ -87,6 +87,19 @@ body {
   }
 }
 
+.app-lockable {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.app-lockable:disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;
