@@ -9,8 +9,8 @@ As the title suggests, your mission is to build the most abysmal search experien
 
 
 ## HOW TO RUN
-npm i
-npm run dev
+- npm i
+- npm run dev
 
 
 
