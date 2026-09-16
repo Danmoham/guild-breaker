@@ -8,6 +8,7 @@ As the title suggests, your mission is to build the most abysmal search experien
 - You can use AI.
 - PLEASE DO NOT tamper with anything that is not related to the search, I have added TODO's where you can and should alter. You can change any CCS you want, but don't go about messing with the timer or the data layer.
 - When presenting run it in incognito and turn off react scan.
+- Also make sure that you put it ON A BRANCH IN THE REPO, so its easier to present.
 
 
 ## HOW TO RUN
