@@ -65,6 +65,41 @@ body {
   letter-spacing: -0.02em;
 }
 
+.countdown-timer {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-timer--panic {
+  color: #d92626;
+  animation: countdown-panic-pulse 1s infinite;
+}
+
+@keyframes countdown-panic-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.app-lockable {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.app-lockable:disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;

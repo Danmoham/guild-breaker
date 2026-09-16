@@ -3,4 +3,5 @@ export interface Player {
   name: string;
   nationality: string;
   rating: number;
+  note?: string;
 }

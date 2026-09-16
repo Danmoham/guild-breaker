@@ -1,4 +1,4 @@
-import { memo, useState, type Dispatch } from 'react';
+import { memo, type Dispatch } from 'react';
 import type { Player } from '../types';
 import type { PlayersAction } from '../reducers/playersReducer';
 
@@ -8,8 +8,6 @@ interface ItemRowProps {
 }
 
 function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
-
-  const [note, setNote] = useState('');
 
   return (
     <tr className="item-row">
@@ -40,8 +38,14 @@ function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
           type="text"
           className="note-input"
           placeholder="Add a note..."
-          value={note}
-          onChange={(event) => setNote(event.target.value)}
+          value={player.note}
+          onChange={(event) =>
+            dispatchPlayersAction({
+              type: 'UPDATE_PLAYER_NOTE',
+              playerIdToUpdate: player.id,
+              updatedNote: event.target.value,
+            })
+          }
           aria-label={`Note for ${player.name}`}
         />
       </td>
@@ -61,10 +65,12 @@ function ItemRow({ player, dispatchPlayersAction }: ItemRowProps) {
 }
 
 /**
+ * THIS IS ACTUALLY HELPFUL, SO FEEL FREE TO TAKE NOTE
  * Memoized so that updating or deleting one player only re-renders that
  * player's row instead of every row in the table. Safe because `player`
  * keeps a stable reference for unaffected rows (see playersReducer) and
  * `dispatchPlayersAction` is a stable function returned by useReducer.
+ * This is act
  */
 export default memo(ItemRow);
 

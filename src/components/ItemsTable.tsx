@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {  useMemo, useReducer } from 'react';
 import { initialPlayers } from '../data/players';
-import { playersReducer } from '../reducers/playersReducer';
-import type { PlayerFiltersState } from '../reducers/playerFiltersReducer';
+import { playersActionReducer } from '../reducers/playersReducer';
+import { hasActiveFilters, type PlayerFiltersState } from '../reducers/playerFiltersReducer';
 import { filterPlayers } from '../utils/filterPlayers';
 import ItemRow from './ItemRow';
 
@@ -11,17 +10,16 @@ interface ItemsTableProps {
 }
 
 function ItemsTable({ filtersState }: ItemsTableProps) {
-  const [players, dispatchPlayersAction] = useReducer(playersReducer, initialPlayers);
+  const [players, dispatchPlayersAction] = useReducer(playersActionReducer, initialPlayers);
 
-  // Bug: missing dependency. `filtersState` is used inside the memoized function
   const filteredPlayers = useMemo(
-    () => filterPlayers(players, filtersState),
-    [players],
+    () => hasActiveFilters(filtersState) ? filterPlayers(players, filtersState) : players,   
+    [players,filtersState]
   );
 
   return (
     <>
-  
+ 
       <table className="items-table">
         <thead>
           <tr>
@@ -40,10 +38,9 @@ function ItemsTable({ filtersState }: ItemsTableProps) {
               </td>
             </tr>
           ) : (
-            filteredPlayers.map((currentPlayer, index) => (
+            filteredPlayers.map((currentPlayer) => (
               <ItemRow
-              // Bug: key issue
-                key={index}
+                key={currentPlayer.id}
                 player={currentPlayer}
                 dispatchPlayersAction={dispatchPlayersAction}
               />

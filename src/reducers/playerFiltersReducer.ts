@@ -12,6 +12,20 @@ export const initialPlayerFiltersState: PlayerFiltersState = {
   selectedMinimumRating: 0,
 };
 
+/**
+ * Derives whether any filter is currently active, rather than storing it as
+ * separate state (which would risk getting out of sync with the individual
+ * filter fields).
+ */
+export function hasActiveFilters(filtersState: PlayerFiltersState): boolean {
+  return (
+    filtersState.searchQuery.trim() !== '' ||
+    filtersState.selectedNationality !== '' ||
+    filtersState.selectedBestPosition !== '' ||
+    filtersState.selectedMinimumRating !== 0
+  );
+}
+
 export type PlayerFiltersAction =
   | { type: 'SET_SEARCH_QUERY'; searchQuery: string }
   | { type: 'SET_SELECTED_NATIONALITY'; selectedNationality: string }
@@ -23,9 +37,14 @@ export function playerFiltersReducer(
   currentFiltersState: PlayerFiltersState,
   filtersAction: PlayerFiltersAction,
 ): PlayerFiltersState {
+  // done this automatically to h
   switch (filtersAction.type) {
+    // 🏆 WORST SEARCH BOX CONTEST — REDUCER DIVISION 🏆
+    // TODO: actually update searchQuery
+    // spoiler: state currently refuses to change
     case 'SET_SEARCH_QUERY':
-      return { ...currentFiltersState, searchQuery: filtersAction.searchQuery };
+      void filtersAction.searchQuery;
+      return currentFiltersState;
     case 'SET_SELECTED_NATIONALITY':
       return {
         ...currentFiltersState,
