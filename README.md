@@ -15,16 +15,16 @@ As the title suggests, your mission is to build the most abysmal search experien
 - npm run dev
 
 ## Teams
-Jenovic Lumu & Barry Murphy
-Myles Smith & Angus Watt
-Augustine Emeghara & Harry Ward-Gray
-Jonathan Ford & Pritom Dip
-George Marriott & Kursat Keskin
-Jai Bhullar & Nick Brawn
-David Parkinson & Joshua Praise
-Augusto Torres & Henry Walker 
-Ollie - on his own
-Chris Parvin - on his own
+- Jenovic Lumu & Barry Murphy
+- Myles Smith & Angus Watt
+- Augustine Emeghara & Harry Ward-Gray
+- Jonathan Ford & Pritom Dip
+- George Marriott & Kursat Keskin
+- Jai Bhullar & Nick Brawn
+- David Parkinson & Joshua Praise
+- Augusto Torres & Henry Walker 
+- Ollie - on his own
+- Chris Parvin - on his own
 
 
 
